@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+	<head>
+		<title>REAL TIME TWITTER STREAM</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+		<div class="jumbotron text-center">
+			<h1>REAL TIME TWITTER STREAM</h1>
+		</div>
+	
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+				<div class="col form-group">
+					<label for="usr">Name:</label>
+					<input type="text" class="form-control" id="usr">
+				</div>
+				<div class="row justify-content-center">
+					<div class="col">
+						<button type="button" class="btn btn-primary btn-lg" onclick="hashtag_click()">Hashtag</button>
+					</div>
+					<div class="col">
+						<button type="button" class="btn btn-primary btn-lg" onclick="user_click()">User</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// URL encoding converts characters into a format that can be transmitted over the Internet.
+			// https://www.w3schools.com/tags/ref_urlencode.asp
+			// # -> %23
+			// @ -> %40
+			function hashtag_click() {
+				tag_val = $("#usr").val();
+				url = "/tweets/?source=%23" + tag_val;
+				window.open(url,"_self") // "_self" is used to open link in the same tab
+			}
+
+			function user_click() {
+				tag_val = $("#usr").val();
+				url = "/tweets/?source=%40" + tag_val;
+				window.open(url,"_self") // "_self" is used to open link in the same tab
+			}
+		</script>
+
+	</body>
+</html>

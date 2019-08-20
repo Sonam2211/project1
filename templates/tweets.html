@@ -1,0 +1,45 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>REAL TIME TWITTER STREAM</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				// start up the SocketIO connection to the server - the namespace 'test' is also included here if necessary
+				var socket = io('http://' + document.domain + ':' + location.port + '/test');
+
+				// this is a callback that triggers when the "my response" event is emitted by the server.
+				socket.on('twts', function(msg) {
+					// $('#log').append('<p>Received: ' + msg.data + '</p>');
+					console.log(msg);
+					$("#tweetList").append("<li>" + msg["data"] + "</li>");
+				});
+
+				socket.on('connect', () => {
+					console.log("connected");
+				});
+
+				socket.on('disconnect', () => {
+					console.log("disconnected");
+				});
+			});
+		</script>
+
+		<div class="jumbotron text-center">
+			<h1>{{title}}</h1>
+		</div>
+
+		<ul id="tweetList">
+
+		</ul>
+
+	</body>
+</html>
