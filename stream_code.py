@@ -35,7 +35,7 @@ class listener(StreamListener):
         print(status)
 
 
-def main(tracker, emit_func):
+def getTwitterStream(tracker, emit_func):
     try:
         api.verify_credentials()
         print("Authentication OK")
@@ -45,14 +45,5 @@ def main(tracker, emit_func):
     tweet_listener = listener()
     tweet_listener.set_funcs(emit_func)
     twitterStream = Stream(auth, tweet_listener)
-    if tracker[0] == "@":
-        val = tracker
-        # to get twitter user-id for the specified username
-        user_objects = api.lookup_users(screen_names=[tracker[1:]])
-        print(user_objects[0].id_str)
-        twitterStream.filter(follow=[user_objects[0].id_str])
-    else:
-        val = "#" + tracker[1:]
-        print(val)
-        twitterStream.filter(track=[val])
-
+    return twitterStream
+  
