@@ -1,7 +1,7 @@
 # Required for socketIO to emit events from background threads.
 # Must be first import in the file.
-from gevent import monkey
-monkey.patch_all()
+import eventlet
+eventlet.monkey_patch()
 
 from flask import Flask, request, Response
 from flask import render_template, jsonify
